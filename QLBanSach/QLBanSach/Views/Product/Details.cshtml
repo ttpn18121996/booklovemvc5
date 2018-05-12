@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            @{Html.RenderAction("SideMenuCD", "Menu");}
+            @{Html.RenderAction("SideMenuNXB", "Menu");}
+        </div>
+        <div class="col-sm-9">
+            <!-- Product detail -->
+            <div class="row mg-top-20">
+                <div class="col new-products">
+                    <span>Chi tiết sản phẩm</span>
+                </div>
+            </div>
+            <div class="row mg-top-20">
+                <div class="col-md-4 detail-img">
+                    <img src="~/imgs/products/@Model.Anhbia" alt="@Model.Tensach" alt="@Model.Tensach">
+                </div>
+                <div class="col-md-8 detail-info">
+                    <h4>@Model.Tensach</h4>
+                    <h4>Chủ đề sách: @Model.TenCD</h4>
+                    <h4>Nhà xuất bản: @Model.TenNXB</h4>
+                    <h4>Giá bán: @String.Format("{0:N0}", @Model.Giaban) VNĐ</h4>
+                    <h4>Giảm giá: @Model.Giamgia %</h4>
+                    <h4>Giá hiện tại: @String.Format("{0:N0}", @Model.Giaht) VNĐ</h4>
+                    <h4>Mô tả:</h4>
+                    <p>@Model.Mota</p>
+                    <p><a href="@Url.Action("Themgiohang", "Cart", new { @iMasach=@Model.Masach, @strURL=Request.Url.ToString()})" class="btn btn-danger"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Thêm vào giỏ hàng</a></p>
+                </div>
+            </div>
+            <div class="row mg-top-20">
+                <div class="col new-products">
+                    <span>Giới thiệu sản phẩm</span>
+                </div>
+            </div>
+            <div class="row mg-top-20">
+                <div class="col-xs-12">
+                    <p>Đây là phần mô tả, giới thiệu sơ về sản phẩm. Phần này không nhất thiết phải viết quá dài vì như vậy sẽ làm mất thời gian. Phần này chỉ cần viết tầm khoảng 300 kí tự chênh lệch không quá 10 kí tự. Phần bị dư ra thì nên thay thế bằng dấu ba chấm (...).</p>
+                    <p>Phần nội dung giới thiệu tóm tắt nội dung của sản phẩm. Đây là phần giới thiệu về sản phẩm. Phần này không giới hạn số lượng kí tự như phần mô tả. Đây là phần đầy đủ nội dung của phần giới thiệu sản phẩm. Phần mô tả chỉ là một phần ngắn của phần này. Phần mô tả là một đoạn đầu của phần này.</p>
+                </div>
+            </div>
+            <!-- End Product detail -->
+        </div>
+    </div>
+</div>
+

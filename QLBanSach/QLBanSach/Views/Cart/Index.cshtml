@@ -1,0 +1,67 @@
+﻿@using QLBanSach.Models
+@model List<CartViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row mg-top-20 text-center">
+        <h2>Thông tin giỏ hàng</h2>
+    </div>
+    <div class="row mg-top-20">
+        <table class="tb-format">
+            <thead>
+                <tr class="tr-format text-center">
+                    <th class="pd">Mã sách</th>
+                    <th class="pd">Tên sách</th>
+                    <th class="pd">Ảnh bìa</th>
+                    <th class="pd">Số lượng</th>
+                    <th class="pd">Đơn giá</th>
+                    <th class="pd">Thành tiền</th>
+                    <th class="pd"></th>
+                    <th class="pd"></th>
+                    <th class="pd"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr class="text-center">
+                        <td class="pd">@item.iMasach</td>
+                        <td class="pd">@item.sTensach</td>
+                        <td class="pd"><img src="~/imgs/products/@item.sAnhbia" alt="@item.sTensach" class="img-s"></td>
+                        @using (Html.BeginForm("Capnhatgiohang", "Cart", new { @iMaSP = @item.iMasach }))
+                        {
+                            <td class="pd">
+                                <input type="number" min="1" class="form-control" value="@item.iSoluong" id="txtSoluong" name="txtSoluong">
+                            </td>
+                            <td class="pd">@String.Format("{0:0,0}", @item.dDongia) VNĐ</td>
+                            <td class="pd">@String.Format("{0:0,0}", @item.dThanhtien) VNĐ</td>
+                            <td class="pd"><a href="@Url.Action("Details", "Product", new { id=@item.iMasach})" class="btn btn-primary">Chi tiết</a></td>
+                            <td class="pd"><a href="@Url.Action("XoaGiohang", "Cart", new { @iMaSP=@item.iMasach})" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                            <td class="pd"><button type="submit" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+                        }
+                    </tr>   
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6" class="text-right text-primary"><h4>Tổng số lượng: @ViewBag.TongSoLuong </h4></td>
+                    <td colspan="3" class="text-right text-danger"><h4>Tổng tiền: @String.Format("{0:0,0}", ViewBag.TongTien) VNĐ</h4></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-center"></td>
+                    <td colspan="3" class="text-center">
+                        <a href="@Url.Action("Order","Cart")" class="btn btn-success btn-block">Đặt hàng</a>
+                    </td>
+                    <td colspan="3" class="text-center"></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+
+
+

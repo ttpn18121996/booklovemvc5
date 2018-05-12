@@ -1,0 +1,92 @@
+﻿@using QLBanSach.Models
+@model List<CartViewModel>
+@{
+    ViewBag.Title = "Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row mg-top-20 text-center">
+        <h2>Thông tin hàng hoá</h2>
+    </div>
+    <div class="row mg-top-20">
+        <table class="tb-format">
+            <thead>
+                <tr class="tr-format text-center">
+                    <th class="pd">Mã sách</th>
+                    <th class="pd">Tên sách</th>
+                    <th class="pd">Ảnh bìa</th>
+                    <th class="pd">Số lượng</th>
+                    <th class="pd">Đơn giá</th>
+                    <th class="pd">Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="text-center">
+                        <td class="pd">@item.iMasach</td>
+                        <td class="pd">@item.sTensach</td>
+                        <td class="pd"><img src="~/imgs/products/@item.sAnhbia" alt="@item.sTensach" class="img-s"></td>
+                        <td class="pd">@item.iSoluong</td>
+                        <td class="pd">@String.Format("{0:0,0}", @item.dDongia) VNĐ</td>
+                        <td class="pd">@String.Format("{0:0,0}", @item.dThanhtien) VNĐ</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-right text-primary"><h4>Tổng số lượng: @ViewBag.TongSoLuong </h4></td>
+                    <td colspan="3" class="text-right text-danger"><h4>Tổng tiền: @String.Format("{0:0,0}", ViewBag.TongTien) VNĐ</h4></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="row mg-top-20 text-center">
+        <h2>Thông tin đặt hàng</h2>
+        @{
+            KHACHHANG kh = (KHACHHANG)Session["Taikhoan"];
+        }
+    </div>
+    <div class="row mg-top-20">
+        @using (Html.BeginForm("Order", "Cart", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+            <div class="form-group">
+                <label class="control-label col-sm-4">Họ tên khách hàng:</label>
+                <div class="col-sm-8">
+                    @Html.TextBox("HotenKH",@kh.HoTen, new { @class = "form-control", disabled="true" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4">Điạ chỉ:</label>
+                <div class="col-sm-8">
+                    @Html.TextBox("Diachi", @kh.DiachiKH, new { @class = "form-control", disabled = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4">Điện thoại:</label>
+                <div class="col-sm-8">
+                    @Html.TextBox("Dienthoai", @kh.DienthoaiKH, new { @class = "form-control", disabled = "true" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4">Ngày đặt:</label>
+                <div class="col-sm-8">
+                    <input type="text" name="Ngaysinh" disabled value="@DateTime.Now.ToShortDateString()" class="form-control" />
+                </div>
+            </div>
+             <div class="form-group">
+                <label class="control-label col-sm-4">Ngày giao:</label>
+                <div class="col-sm-8">
+                    <input type="date" name="Ngaygiao" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-8 col-sm-offset-4">
+                    <button type="submit" class="btn btn-primary">Đồng ý đặt hàng</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

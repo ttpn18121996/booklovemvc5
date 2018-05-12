@@ -1,0 +1,16 @@
+﻿@model IEnumerable<QLBanSach.Models.CHUDE>
+<div class="row mg-top-20 category">
+    <div class="col-xs-12">
+        <div class="category-title">
+            <h4>Danh sách thể loại</h4>
+        </div>
+        <div class="category-detail">
+            <ul>
+                @foreach (var cd in Model)
+                {
+                    <li><a href="@Url.Action("Product", "Product", new { id=@cd.MaCD, cat="chu-de" })" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> @cd.TenChuDe</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

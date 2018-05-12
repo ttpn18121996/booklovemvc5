@@ -1,0 +1,16 @@
+﻿@model IEnumerable<QLBanSach.Models.NHAXUATBAN>
+<div class="row mg-top-20 category">
+    <div class="col-xs-12">
+        <div class="category-title">
+            <h4>Danh sách nhà xuất bản</h4>
+        </div>
+        <div class="category-detail">
+            <ul>
+                @foreach (var cd in Model)
+                {
+                    <li><a href="@Url.Action("Product", "Product", new { id=@cd.MaNXB, cat="nxb" })" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> @cd.TenNXB</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

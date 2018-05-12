@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Book Love Store</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/owl.theme.default.css">
+    <link rel="stylesheet" href="~/Content/myCss.css">
+    <script type="text/javascript" src="~/Scripts/jquery-3.2.1.min.js"></script>
+
+</head>
+<body>
+    <!-- Side Menu -->
+    <div class="sideMenu">
+        <div class="closeTrigger"><a href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i></a></div>
+        <ul class="sideMenu-ul mg-top-20">
+            <li><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+            <li><a href="#">Giới thiệu</a></li>
+            <li><a href="#">Sản phẩm</a></li>
+            <li><a href="#">Bài viết</a></li>
+            <li><a href="#">Liên hệ</a></li>
+        </ul>
+    </div>
+    <!-- End Side Menu -->
+    <div class="sideWrapper">
+        <!-- Header -->
+        <header id="header" class="container-fluid">
+            <div class="top-bar container">
+                <div class="row">
+                    <div class="col-sm-3 top-left">
+                        <div class="pull-left">
+                            <div class="logo">
+                                <a href="@Url.Action("Index","Home")"><img src="~/imgs/logo.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <div class="mobile-heading-cart">
+                                <a href="@Url.Action("Index","Cart")"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-9 top-right">
+                        <div class="pull-right">
+                            <div class="heading-cart">
+                                <a href="@Url.Action("Index","Cart")"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Giỏ hàng</a>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <ul id="user-info">
+                                @{
+                                    if (Session["Taikhoan"] == null || Session["Taikhoan"].ToString() == "")
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("Signin","User")"><i class="fa fa-sign-in" aria-hidden="true"></i> Đăng nhập</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Signup","User")"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Đăng ký</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("Signin","User")"><i class="fa fa-user" aria-hidden="true"></i> Thông tin tài khoản</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Signout","User")"><i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất</a>
+                                        </li>
+                                    }
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- End Header -->
+        <!-- Navigation -->
+        <div id="navigation">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="container mobile-menu">
+                        <div class="pull-left mobile-menu-ham sideTrigger">
+                            <i class="fa fa-bars" aria-hidden="true"></i>
+                        </div>
+                        <div class="mobile-form-search">
+                            <form action="" method="get" accept-charset="utf-8">
+                                <input type="text" placeholder="Tìm kiếm sản phẩm..." name="txtSearch">
+                                <span>
+                                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </span>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="container top-menu">
+                        <ul class="top-menu-ul">
+                            <li class="top-menu-items active">@Html.ActionLink("Trang chủ", "Index", "Home")</li>
+                            <li class="top-menu-items">@Html.ActionLink("Giớ thiệu", "About", "Home")</li>
+                            <li class="top-menu-items">
+                                <a href="@Url.Action("Product","Product")">Chủ đề &nbsp;<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                <ul class="dropDownMenu">
+                                    @{ Html.RenderAction("Chude", "Menu");}
+                                </ul>
+                            </li>
+                            <li class="top-menu-items">
+                                <a href="@Url.Action("Product","Product")">Nhà xuất bản &nbsp;<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                <ul class="dropDownMenu">
+                                    @{ Html.RenderAction("NXB", "Menu");}
+                                </ul>
+                            </li>
+                            <li class="top-menu-items">@Html.ActionLink("Liên hệ", "Contact", "Home")</li>
+                            <li class="top-menu-items li-search">
+                                <div class="form-search">
+                                    <form action="" method="get" accept-charset="utf-8">
+                                        <input type="text" placeholder="Tìm kiếm sản phẩm..." name="txtSearch">
+                                        <span>
+                                            <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                        </span>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Navigation -->
+        @RenderBody()
+
+        <!-- Info -->
+        <div class="container-fluid mg-top-20" id="info">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-4">
+                        <h3>Thông tin liên hệ</h3>
+                        <ul>
+                            <li><i class="fa fa-map-marker" aria-hidden="true"></i> Địa chỉ: 590/19 Cách Mạng tháng 8, phường 11, quận 3, TPHCM</li>
+                            <li><i class="fa fa-phone" aria-hidden="true"></i> Điện thoại: 0126 4196 421</li>
+                            <li><i class="fa fa-envelope" aria-hidden="true"></i> Email: ttpn18121996@gmail.com</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-12 col-md-4">
+                        <h3>Giới thiệu chung</h3>
+                        <ul>
+                            <li><a href="#">Giới thiệu về Book Love</a></li>
+                            <li><a href="#">Chính sách vận chuyển</a></li>
+                            <li><a href="#">Chính sách đổi trả</a></li>
+                            <li><a href="#">Bản quyền</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-12 col-md-4">
+                        <h3>Hỗ trợ</h3>
+                        <ul>
+                            <li>Khiếu nại: 8:00 - 12:00, 13:00 - 17:00</li>
+                            <li><a href="#">Hướng dẫn mua hàng online</a></li>
+                            <li><a href="#">Hướng dẫn thanh toán</a></li>
+                            <li><a href="#">Hỗ trợ khách hàng</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Info -->
+        <!-- Footer -->
+        <div class="container-fluid" id="footer">
+            <div class="container">
+                Copyright &copy; 2017 Book Love | Design by Trịnh Trần Phương Nam
+            </div>
+        </div>
+        <!-- End Footer -->
+    </div>
+    <!-- Back to top -->
+    <div class="scrolltop">
+        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+    </div>
+    <!-- End Back to top -->
+    <!-- Pooper js -->
+    <script type="text/javascript" src="~/Scripts/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <!-- Owl carousel js -->
+    <script type="text/javascript" src="~/Scripts/owl.carousel.js"></script>
+    <!-- Dropdown menu -->
+    <script type="text/javascript" src="~/Scripts/dropdownmenu.js"></script>
+    <!-- Back to top -->
+    <script type="text/javascript" src="~/Scripts/myJS.js"></script>
+
+    <!-- Slide -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Slide Products
+            $('#slide-pro').owlCarousel({
+                loop: true,
+                margin: 10,
+                responsiveClass: true,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                smartSpeed: 800,
+
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: false,
+                        autoplay: false
+                    },
+                    498: {
+                        items: 2,
+                        nav: false
+                    },
+                    785: {
+                        items: 3,
+                        nav: false,
+                        dots: true
+                    },
+                    1200: {
+                        items: 4,
+                        nav: true,
+                        navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
+                        margin: 30,
+                        dots: false,
+                    }
+                }
+            })
+        });
+    </script>
+    <!-- Side Menu -->
+    <script type="text/javascript">
+        $(".sideTrigger").click(function () {
+            $("body").toggleClass('sideOpen');
+        });
+        $(".closeTrigger").click(function () {
+            $("body").removeClass('sideOpen');
+        });
+    </script>
+</body>
+</html>

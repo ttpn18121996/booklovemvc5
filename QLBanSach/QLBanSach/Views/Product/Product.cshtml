@@ -1,0 +1,61 @@
+﻿@using QLBanSach.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<SACH>
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            @{Html.RenderAction("SideMenuCD", "Menu");}
+            @{Html.RenderAction("SideMenuNXB", "Menu");}
+        </div>
+        <div class="col-sm-9">
+            <div class="row mg-top-20">
+                <div class="col new-products">
+                    <span>Sản phẩm</span>
+                </div>
+            </div>
+            <div class="row mg-top-20">
+                @foreach (var sach in Model)
+                {
+                    <div class="col-sm-4 col-s-6 col-xs-12 mg-top-20">
+                        <div class="box-product event-product">
+                            <div class="thumb-product">
+                                <img src="~/imgs/products/@sach.Anhbia" alt="@sach.Tensach">
+                                <div class="sale-product">-@sach.Giamgia%</div>
+                            </div>
+                            <a href="#">
+                                <div class="info-product">
+                                    <h4>@sach.Tensach</h4>
+                                    <div class="new-price">
+                                        <span>@String.Format("{0:N0}",@sach.Giaht) VNĐ</span>
+                                    </div>
+                                    <div class="old-price">
+                                        <del>@String.Format("{0:N0}",@sach.Giaban) VNĐ</del>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="view-product">
+                                <a href="@Url.Action("Themgiohang", "Cart", new { @iMasach=@sach.Masach, @strURL=Request.Url.ToString()})"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                                <a href="@Url.Action("Details", "Product", new { id=sach.Masach})"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div class="row">
+                Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount;
+            </div>
+            <div class="page">
+                @Html.PagedListPager(Model, page => Url.Action("Product", new { page = page}))
+            </div>
+        </div>
+    </div>
+    
+    
+</div>

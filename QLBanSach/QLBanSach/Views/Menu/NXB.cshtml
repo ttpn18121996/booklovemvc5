@@ -1,0 +1,6 @@
+﻿@model IEnumerable<QLBanSach.Models.NHAXUATBAN>
+
+@foreach (var cd in Model)
+{
+    <li><a href="@Url.Action("Product", "Product", new { id= @cd.MaNXB, cat="nxb"})">@cd.TenNXB</a></li>
+}

@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Signin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row mg-top-20 text-center">
+        <h3>Đăng nhập</h3>
+    </div>
+    <div class="row mg-top-20 text-center">
+        <div class="col-md-8 col-md-offset-2">
+            @using (Html.BeginForm("Signin", "User", FormMethod.Post, new { @class="form-horizontal"}))
+            {
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Tài khoản:</label>
+                    <div class="col-sm-8">
+                        @Html.TextBox("TenDN", "", new { @class = "form-control", placeholder = "Nhập tài khoản" })
+                        @ViewData["Loi1"]
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Mật khẩu:</label>
+                    <div class="col-sm-8">
+                        @Html.Password("Matkhau", "", new { @class = "form-control", placeholder = "Nhập mật khẩu" })
+                        @ViewData["Loi2"]
+                    </div>
+                </div>
+                if (ViewBag.Error == "1")
+                {
+                    <div class="form-group">
+                        <div class="alert alert-danger" role="alert">@ViewBag.Thongbao</div>
+                    </div>
+                }
+                
+                <div class="form-group">
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

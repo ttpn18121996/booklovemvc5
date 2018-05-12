@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "Signup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row mg-top-20 text-center">
+        <h3>Đăng ký thành viên</h3>
+    </div>
+    <div class="row mg-top-20">
+        <div class="col-md-8 col-md-offset-2">
+            @using (Html.BeginForm("Signup", "User", FormMethod.Post, new { @class="form-horizontal"}))
+            {
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Họ tên khách hàng:</label>
+                    <div class="col-sm-8">
+                        @Html.TextBox("HotenKH", "", new { @class="form-control", placeholder="Nhập họ tên"})
+                        @ViewData["Loi1"]
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Tên đăng nhập:</label>
+                    <div class="col-sm-8">
+                        @Html.TextBox("TenDN", "", new { @class="form-control", placeholder="Nhập tên tài khoản"})
+                        @ViewData["Loi2"]
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Mật khẩu:</label>
+                    <div class="col-sm-8">
+                        @Html.Password("Matkhau", "", new { @class="form-control", placeholder="Nhập mật khẩu"})
+                        @ViewData["Loi3"]
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Nhập lại mật khẩu:</label>
+                    <div class="col-sm-8">
+                        @Html.Password("Matkhaunhaplai", "", new { @class="form-control", placeholder="Nhập lại mật khẩu"})
+                        @ViewData["Loi4"]
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Email:</label>
+                    <div class="col-sm-8">
+                        <input type="email" class="form-control" name="Email" placeholder="Nhập email" />
+                        @ViewData["Loi5"]
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Điạ chỉ:</label>
+                    <div class="col-sm-8">
+                        @Html.TextBox("Diachi", "", new { @class="form-control", placeholder="Nhập địa chỉ"})
+                        @ViewData["Loi6"]
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Điện thoại:</label>
+                    <div class="col-sm-8">
+                        @Html.TextBox("Dienthoai", "", new { @class="form-control", placeholder="Nhập số điện thoại"})
+                        @ViewData["Loi7"]
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Ngày sinh:</label>
+                    <div class="col-sm-8">
+                        <input type="date" name="Ngaysinh" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <button type="submit" class="btn btn-primary">Đăng ký</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
